@@ -29,7 +29,7 @@ export const Navbar = () => {
           <Link to={"contact"} className="hover:border-b border-black">
             Contact
           </Link>
-          <Link to={"about"} className="hover:border-b border-black">
+          <Link to={"checkout"} className="hover:border-b border-black">
             About
           </Link>
           <Link to={"signup"} className="hover:border-b border-black">
@@ -49,8 +49,11 @@ export const Navbar = () => {
             <FaRegHeart />
           </div>
           <div className="text-xl cursor-pointer">
-            <Link to={'cart'}>
+            <Link to={"cart"} className="relative">
               <MdOutlineShoppingCart />
+              <span className="w-5 h-5 flex justify-center items-center text-white absolute -right-1.5 -top-2.5 bg-reddish rounded-full text-sm">
+                0
+              </span>
             </Link>
           </div>
         </div>

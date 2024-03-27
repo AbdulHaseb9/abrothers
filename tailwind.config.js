@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        // Large Mobile Viewport
+        mlg: "425px",
+      },
       colors: {
         lightgrey: "#F5F5F5",
         darkgrey: "#7D8184",

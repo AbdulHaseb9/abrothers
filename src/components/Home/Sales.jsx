@@ -282,6 +282,7 @@ export default function Sales() {
           </div>
         </div> */}
       </div>
+      {/* View All product button */}
       <div className="flex justify-center items-center my-7">
         <button className="bg-reddish text-white px-3 py-2 font-semibold rounded-sm">
           View All Products
