@@ -11,6 +11,7 @@ import { Footer } from "./components/Footer";
 import Cart from "./pages/Cart";
 import { Checkout } from "./pages/Checkout";
 import Productdetail from "./pages/Productdetail";
+import Filtercategory from "./pages/Filtercategory";
 
 function App() {
   return (
@@ -29,7 +30,11 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path=":name" element={<Productdetail />} />
+          <Route
+            path="category/:name/:prodname"
+            element={<Productdetail />}
+          />
+          <Route path="category/:name" element={<Filtercategory />} />
         </Route>
       </Routes>
       <Footer />

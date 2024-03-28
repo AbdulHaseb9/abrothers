@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Productdetail() {
-  const { name } = useParams();
+  const { prodname } = useParams();
 
   const [productname, setproductname] = useState([]);
 
@@ -13,14 +13,16 @@ export default function Productdetail() {
     });
   }, []);
 
-  const filterproduct = productname.filter((value) => value.name == name);
+  const filterproduct = productname.filter((value) => value.name == prodname);
 
   return (
     <div className="px-5 md:px-11 py-6">
       {/* Route */}
       <div className="text-sm font-semibold">
-        <span className="text-darkgrey mr-1">Home</span> /
-        <span className="ml-1 w-2">{name}</span>
+        <Link to={"/"} className="text-darkgrey mr-1">
+          Home
+        </Link>{" "}
+        /<span className="ml-1 w-2">{prodname}</span>
       </div>
       {/* Product Detail */}
       {filterproduct.map((item, index) => {

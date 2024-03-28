@@ -7,6 +7,7 @@ import { BsSmartwatch } from "react-icons/bs";
 import { FaCamera } from "react-icons/fa";
 import { FaHeadphones } from "react-icons/fa";
 import { SiYoutubegaming } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 export default function Browsecategories() {
   return (
@@ -32,30 +33,48 @@ export default function Browsecategories() {
       </div>
       {/* Categories */}
       <div className="grid place-items-center grid-cols-2 md:grid-cols-4 md:place-items-start lg:grid-cols-6 gap-4">
-        <div className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer">
+        <Link
+          to={"category/mobile phones"}
+          className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer"
+        >
           <FaMobileAlt className="text-5xl" />
           <p className="mt-2 font-semibold">Phones</p>
-        </div>
-        <div className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer">
+        </Link>
+        <Link
+          to={"category/computers"}
+          className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer"
+        >
           <HiOutlineDesktopComputer className="text-5xl" />
           <p className="mt-2 font-semibold">Computers</p>
-        </div>
-        <div className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer">
+        </Link>
+        <Link
+          to={"category/smart watches"}
+          className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer"
+        >
           <BsSmartwatch className="text-5xl" />
           <p className="mt-2 font-semibold">SmartWatch</p>
-        </div>
-        <div className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer">
+        </Link>
+        <Link
+          to={"category/camera"}
+          className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer"
+        >
           <FaCamera className="text-5xl" />
           <p className="mt-2 font-semibold">Camera</p>
-        </div>
-        <div className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer">
+        </Link>
+        <Link
+          to={"category/headphones"}
+          className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer"
+        >
           <FaHeadphones className="text-5xl" />
           <p className="mt-2 font-semibold">HeadPhones</p>
-        </div>
-        <div className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer">
+        </Link>
+        <Link
+          to={"category/gaming"}
+          className="w-36 border border-darkgrey py-6 px-0 md:px-4 rounded-md flex flex-col justify-center items-center hover:bg-reddish hover:text-white transition-all duration-100 cursor-pointer"
+        >
           <SiYoutubegaming className="text-5xl" />
           <p className="mt-2 font-semibold">Gaming</p>
-        </div>
+        </Link>
       </div>
     </div>
   );
