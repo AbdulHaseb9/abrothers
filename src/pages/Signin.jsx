@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import SignImages from "../assets/images/sideimage.png";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const Signin = () => {
+  const [logindata, setlogindata] = useState({
+    emailorphone: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handlelogin = (e) => {
+    e.preventDefault();
+    fetch("https://abrotherbackend.vercel.app/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(logindata),
+    })
+      .then((resp) => {
+        resp.json();
+        resp.status === 400
+          ? toast.error("Invalid Credentials")
+          : toast.success("Login sucessfully");
+      })
+      .then((data) => {
+        console.log(data);
+        navigate("/");
+      });
+  };
+
   return (
     <div className="py-7 flex flex-col md:flex-row gap-7 md:gap-0">
+      <Toaster />
       <div className="w-full md:w-1/2 flex justify-end">
         <img
           src={SignImages}
@@ -15,24 +46,36 @@ export const Signin = () => {
         <div className="w-72">
           <h3 className="text-2xl font-semibold">Log in to Exclusive</h3>
           <p className="text-sm font-semibold my-2">Enter your details below</p>
-          <input
-            type="text"
-            placeholder="Email or Phone Number"
-            className="my-4 w-72 border-b outline-none text-darkgrey"
-          />
-          <input
-            type="text"
-            placeholder="Password"
-            className="my-4 w-72 border-b outline-none text-darkgrey"
-          />
-          <div className="flex justify-between items-center">
-            <button className="w-24 text-white bg-reddish text-sm px-3 py-2.5 text-center me-2 mb-2 rounded-sm">
-              Login
-            </button>
-            <p className="text-reddish text-sm text-center cursor-pointer">
-              Forget Password?
-            </p>
-          </div>
+          <form onSubmit={handlelogin}>
+            <input
+              type="text"
+              required
+              onChange={(e) =>
+                setlogindata({ ...logindata, emailorphone: e.target.value })
+              }
+              placeholder="Email or Phone Number"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+            />
+            <input
+              type="text"
+              onChange={(e) =>
+                setlogindata({ ...logindata, password: e.target.value })
+              }
+              placeholder="Password"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+              required
+            />
+            <div className="flex justify-between items-center">
+              <input
+                type="submit"
+                value={"Login"}
+                className="w-24 text-white bg-reddish text-sm px-3 py-2.5 text-center me-2 mb-2 rounded-sm"
+              />
+              <p className="text-reddish text-sm text-center cursor-pointer">
+                Forget Password?
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>

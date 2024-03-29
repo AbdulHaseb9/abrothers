@@ -13,7 +13,7 @@ export default function Sales() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("http://localhost:3000/getproduct")
+    fetch("https://abrotherbackend.vercel.app/getproduct")
       .then((res) => res.json())
       .then((data) => setproductinfo(data));
   }, []);

@@ -8,7 +8,7 @@ export default function Productdetail() {
   const [productname, setproductname] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/getproduct").then((resp) => {
+    fetch("https://abrotherbackend.vercel.app/getproduct").then((resp) => {
       resp.json().then((data) => setproductname(data));
     });
   }, []);

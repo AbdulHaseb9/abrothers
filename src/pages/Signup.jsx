@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import SignImages from "../assets/images/sideimage.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 
 export const Signup = () => {
-  const aler = () => {
-    toast.success("Register succefully!");
-    // alert("work");
+  const [registerdata, setregisterdata] = useState({
+    name: "",
+    emailorphone: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  // function that handle register when user submit data
+  const handleregister = (e) => {
+    e.preventDefault();
+
+    fetch("https://abrotherbackend.vercel.app/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(registerdata),
+    })
+      .then((resp) => {
+        resp.json();
+        resp.status === 402
+          ? toast.error("Email already taken")
+          : toast.success("registered sucessfully");
+      })
+      .then((data) => {
+        console.log(data);
+        navigate("/login");
+      });
   };
 
   return (
@@ -23,26 +49,44 @@ export const Signup = () => {
         <div className="w-72">
           <h3 className="text-2xl font-semibold">Create an account</h3>
           <p className="text-sm font-semibold my-2">Enter your details below</p>
-          <input
-            type="text"
-            placeholder="Name"
-            className="my-4 w-72 border-b outline-none text-darkgrey"
-          />
-          <input
-            type="text"
-            placeholder="Email or Phone Number"
-            className="my-4 w-72 border-b outline-none text-darkgrey"
-          />
-          <input
-            type="text"
-            placeholder="Password"
-            className="my-4 w-72 border-b outline-none text-darkgrey"
-          />
-          <button className="w-72 text-white bg-reddish text-sm px-3 py-2.5 text-center me-2 mb-2">
-            Create Account
-          </button>
+          <form onSubmit={handleregister}>
+            <input
+              type="text"
+              required
+              placeholder="Enter name"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+              onChange={(e) =>
+                setregisterdata({ ...registerdata, name: e.target.value })
+              }
+            />
+            <input
+              type="email"
+              required
+              placeholder="Enter email address"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+              onChange={(e) =>
+                setregisterdata({
+                  ...registerdata,
+                  emailorphone: e.target.value,
+                })
+              }
+            />
+            <input
+              type="text"
+              required
+              placeholder="Enter password"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+              onChange={(e) =>
+                setregisterdata({ ...registerdata, password: e.target.value })
+              }
+            />
+            <input
+              type="submit"
+              value={"Create Account"}
+              className="cursor-pointer w-72 text-white bg-reddish text-sm px-3 py-2.5 text-center me-2 mb-2"
+            />
+          </form>
           <button
-            onClick={() => aler()}
             type="button"
             className="w-72 text-black border border-darkgrey font-medium text-sm px-3 py-2.5 inline-flex justify-center items-center me-2 mb-2 gap-1 my-2"
           >
@@ -76,7 +120,7 @@ export const Signup = () => {
           <p className="text-darkgrey text-sm text-center">
             Already have account?
             <Link
-              to={"signin"}
+              to={"/signin"}
               className="text-black border-b border-black ml-3 cursor-pointer"
             >
               Log in

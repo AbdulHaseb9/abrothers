@@ -16,7 +16,7 @@ export default function Exploreproduct() {
   // const selector = useSelector((state) => state.cart.value);
 
   useEffect(() => {
-    fetch("http://localhost:3000/getproduct")
+    fetch("https://abrotherbackend.vercel.app/getproduct")
       .then((res) => res.json())
       .then((data) => setproduct(data));
   }, []);
