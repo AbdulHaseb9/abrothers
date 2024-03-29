@@ -1,44 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addtocart } from "../../redux/addtocart/addcart";
+
 export default function Sales() {
-  const productinfo = [
-    {
-      name: "Oppo Reno 11F 5G",
-      actualprice: "79999",
-      discprice: "72999",
-      ratings: "42",
-      image: "https://media.wisemarket.com.pk/product/oppo-reno-11f-5g-47.webp",
-    },
-    {
-      name: "Baseus Bowie H1 cancellation",
-      actualprice: "19999",
-      discprice: "16999",
-      ratings: "68",
-      image: "https://media.wisemarket.com.pk/variant/inventory_24118.webp",
-    },
-    {
-      name: "Realme Buds Wireless Bluetooth Neckband",
-      actualprice: "7999",
-      discprice: "5299",
-      ratings: "33",
-      image:
-        "https://media.wisemarket.com.pk/product/realme-buds-wireless-bluetooth-neckband-71.webp",
-    },
-    {
-      name: "Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh",
-      actualprice: "5399",
-      discprice: "4399",
-      ratings: "18",
-      image:
-        "https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp",
-    },
-  ];
+  const [productinfo, setproductinfo] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch("http://localhost:3000/getproduct")
+      .then((res) => res.json())
+      .then((data) => setproductinfo(data));
+  }, []);
+
+  const handleaddtocart = (item) => {
+    const producttoadd = {
+      name: item.name,
+      discountprice: item.discountprice,
+      image: item.image,
+      quantity: 1,
+    };
+    dispatch(addtocart(producttoadd));
+    toast.success("succefully added to cart");
+  };
 
   return (
     <div className="px-5 md:px-11 py-6">
+      <Toaster />
       {/* Section Name */}
       <div className="relative space-x-5">
         <span className="absolute bg-reddish w-3 h-9 rounded-sm"></span>
@@ -77,210 +70,56 @@ export default function Sales() {
       </div>
       {/* Product Cards */}
       <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        <div className="w-full">
-          <div className="w-full border border-lightgrey relative">
-            <span className="bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-              -40%
-            </span>
-            <span className="bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-              <FaRegHeart />
-            </span>
-            <img
-              src="https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp"
-              alt=""
-              className="w-full h-36 md:h-44 object-cover"
-            />
-            <div className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer">
-              Add To Cart
+        {productinfo.map((item, index) => {
+          return (
+            <div className="relative w-full" key={index}>
+              {/* Discount value */}
+              <span className="z-40 bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
+                {Math.round((item.discountprice / item.actualprice) * 100) -
+                  100}
+                %
+              </span>
+              {/* add to wishlist */}
+              <span className="z-40 bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
+                <FaRegHeart />
+              </span>
+              <div className="w-full border border-lightgrey relative">
+                {/* Product Image */}
+                <Link to={`category/${item.category}/${item.name}`}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-36 md:h-44 object-cover"
+                  />
+                </Link>
+                {/* Add to cart button*/}
+                <button
+                  onClick={() => handleaddtocart(item)}
+                  className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer"
+                >
+                  Add To Cart
+                </button>
+              </div>
+              <Link to={`category/${item.category}/${item.name}`}>
+                <div className="my-3 max-w-44">
+                  <h3 className="truncate">{item.name}</h3>
+                  <p className="text-reddish">
+                    {item.discountprice}
+                    <del className="text-darkgrey mx-3">{item.actualprice}</del>
+                  </p>
+                  <p className="flex my-2 gap-1 text-golden">
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <span className="text-darkgrey mx-2">(88)</span>
+                  </p>
+                </div>
+              </Link>
             </div>
-          </div>
-          <div className="my-3 max-w-44">
-            <h3 className="truncate">
-              Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh
-            </h3>
-            <p className="text-reddish">
-              $120<del className="text-darkgrey mx-3">$160</del>
-            </p>
-            <p className="flex my-2 gap-1 text-golden">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <span className="text-darkgrey mx-2">(88)</span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="w-full border border-lightgrey relative">
-            <span className="bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-              -40%
-            </span>
-            <span className="bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-              <FaRegHeart />
-            </span>
-            <img
-              src="https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp"
-              alt=""
-              className="w-full h-36 md:h-44 object-cover"
-            />
-            <div className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer">
-              Add To Cart
-            </div>
-          </div>
-          <div className="my-3 max-w-44">
-            <h3 className="truncate">
-              Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh
-            </h3>
-            <p className="text-reddish">
-              $120<del className="text-darkgrey mx-3">$160</del>
-            </p>
-            <p className="flex my-2 gap-1 text-golden">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <span className="text-darkgrey mx-2">(88)</span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="w-full border border-lightgrey relative">
-            <span className="bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-              -40%
-            </span>
-            <span className="bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-              <FaRegHeart />
-            </span>
-            <img
-              src="https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp"
-              alt=""
-              className="w-full h-36 md:h-44 object-cover"
-            />
-            <div className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer">
-              Add To Cart
-            </div>
-          </div>
-          <div className="my-3 max-w-44">
-            <h3 className="truncate">
-              Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh
-            </h3>
-            <p className="text-reddish">
-              $120<del className="text-darkgrey mx-3">$160</del>
-            </p>
-            <p className="flex my-2 gap-1 text-golden">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <span className="text-darkgrey mx-2">(88)</span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="w-full border border-lightgrey relative">
-            <span className="bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-              -40%
-            </span>
-            <span className="bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-              <FaRegHeart />
-            </span>
-            <img
-              src="https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp"
-              alt=""
-              className="w-full h-36 md:h-44 object-cover"
-            />
-            <div className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer">
-              Add To Cart
-            </div>
-          </div>
-          <div className="my-3 max-w-44">
-            <h3 className="truncate">
-              Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh
-            </h3>
-            <p className="text-reddish">
-              $120<del className="text-darkgrey mx-3">$160</del>
-            </p>
-            <p className="flex my-2 gap-1 text-golden">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <span className="text-darkgrey mx-2">(88)</span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="w-full border border-lightgrey relative">
-            <span className="bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-              -40%
-            </span>
-            <span className="bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-              <FaRegHeart />
-            </span>
-            <img
-              src="https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp"
-              alt=""
-              className="w-full h-36 md:h-44 object-cover"
-            />
-            <div className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer">
-              Add To Cart
-            </div>
-          </div>
-          <div className="my-3 max-w-44">
-            <h3 className="truncate">
-              Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh
-            </h3>
-            <p className="text-reddish">
-              $120<del className="text-darkgrey mx-3">$160</del>
-            </p>
-            <p className="flex my-2 gap-1 text-golden">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <span className="text-darkgrey mx-2">(88)</span>
-            </p>
-          </div>
-        </div>
-        {/* <div className="">
-          <div className="w-48 border border-lightgrey relative">
-            <span className="bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-              -40%
-            </span>
-            <span className="bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-              <FaRegHeart />
-            </span>
-            <img
-              src="https://media.wisemarket.com.pk/product/remax-rpp-521-20w-22-5w-pd-qc-power-bank-20000mah-92.webp"
-              alt=""
-              className="w-full h-36 md:h-44 object-cover"
-            />
-            <div className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer">
-              Add To Cart
-            </div>
-          </div>
-          <div className="my-3 max-w-44">
-            <h3 className="truncate">
-              Remax RPP-521 20W+22.5 PD+QC Power Bank 20000 mAh
-            </h3>
-            <p className="text-reddish">
-              $120<del className="text-darkgrey mx-3">$160</del>
-            </p>
-            <p className="flex my-2 gap-1 text-golden">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <span className="text-darkgrey mx-2">(88)</span>
-            </p>
-          </div>
-        </div> */}
+          );
+        })}
       </div>
       {/* View All product button */}
       <div className="flex justify-center items-center my-7">

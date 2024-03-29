@@ -5,10 +5,14 @@ import { FaRegHeart } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
+import { useSelector } from "react-redux";
+
 
 export const Navbar = () => {
+  const count = useSelector((state) => state.cart.value);
   const [respnav, setrespnav] = useState(false);
   const [submenu, setsubmenu] = useState(false);
+
 
   return (
     <>
@@ -52,7 +56,7 @@ export const Navbar = () => {
             <Link to={"cart"} className="relative">
               <MdOutlineShoppingCart />
               <span className="w-5 h-5 flex justify-center items-center text-white absolute -right-1.5 -top-2.5 bg-reddish rounded-full text-sm">
-                0
+                {count.length}
               </span>
             </Link>
           </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
-
 export default function Filtercategory() {
   const { name } = useParams();
 

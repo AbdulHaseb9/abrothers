@@ -1,10 +1,17 @@
 import React from "react";
 import SignImages from "../assets/images/sideimage.png";
 import { Link } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 export const Signup = () => {
+  const aler = () => {
+    toast.success("Register succefully!");
+    // alert("work");
+  };
+
   return (
     <div className="py-7 flex flex-col gap-7 md:flex-row md:gap-0">
+      <Toaster />
       <div className="w-full md:w-1/2 flex justify-end">
         <img
           src={SignImages}
@@ -35,6 +42,7 @@ export const Signup = () => {
             Create Account
           </button>
           <button
+            onClick={() => aler()}
             type="button"
             className="w-72 text-black border border-darkgrey font-medium text-sm px-3 py-2.5 inline-flex justify-center items-center me-2 mb-2 gap-1 my-2"
           >
