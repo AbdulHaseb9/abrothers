@@ -13,8 +13,21 @@ import { Checkout } from "./pages/Checkout";
 import Productdetail from "./pages/Productdetail";
 import Filtercategory from "./pages/Filtercategory";
 import Myaccount from "./pages/Myaccount";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logintrue } from "./redux/Login/userlogin";
 
 function App() {
+  const selector = useSelector((state) => state.login.value);
+  const dispatch = useDispatch();
+
+  // function that get value from localstorage and if get its do login true and if user reload the page user doesnt automatically logout
+  useEffect(() => {
+    if (localStorage.getItem("username")) {
+      dispatch(logintrue());
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -28,7 +41,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="myaccount" element={<Myaccount />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="cart/checkout" element={<Checkout />} />
           <Route path="category/:name/:prodname" element={<Productdetail />} />
           <Route path="category/:name" element={<Filtercategory />} />
         </Route>

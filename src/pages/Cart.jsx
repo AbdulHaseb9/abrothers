@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const count = useSelector((state) => state.cart.value);
@@ -9,10 +9,13 @@ export default function Cart() {
     navigate("/");
   };
 
-  console.log(count);
-  // console.log(count[0].quantity + 2);
+  let totalprice = 0;
 
-
+  // loop that check prices of all cart and assigned it to totalprice
+  for (let index = 0; index < count.length; index++) {
+    const element = count[index].discountprice;
+    totalprice += element;
+  }
   return (
     <div className="px-5 md:px-11 py-6">
       {/* Cart Category */}
@@ -35,44 +38,45 @@ export default function Cart() {
             <h4>Subtotal</h4>
           </div>
         </div>
-        {count.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className="shadow-[rgba(17,_17,_26,_0.1)_0px_0px_5px] border border-lightgrey grid grid-cols-4 place-items-center font-semibold my-5"
-            >
-              <div className="md:flex items-center">
-                <img src={item.image} alt={item.name} className="max-h-20" />
-                <figcaption className="text-center truncate w-32">
-                  {item.name}
-                </figcaption>
+        {/* if cart is empty its show  cart empty */}
+        {count.length === 0 ? (
+          <h1 className="text-center py-5 text-2xl">Cart is Empty</h1>
+        ) : (
+          count.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="shadow-[rgba(17,_17,_26,_0.1)_0px_0px_5px] border border-lightgrey grid grid-cols-4 place-items-center font-semibold my-5"
+              >
+                <div className="md:flex items-center">
+                  <img src={item.image} alt={item.name} className="max-h-20" />
+                  <figcaption className="text-center truncate w-32">
+                    {item.name}
+                  </figcaption>
+                </div>
+                <div>
+                  <h4>PKR {item.discountprice}</h4>
+                </div>
+                <div>
+                  <span className="text-xl mx-2 p-1 cursor-pointer">-</span>
+                  <input
+                    type="text"
+                    className="w-7 text-center"
+                    placeholder="1"
+                    value={item.quantity}
+                    disabled
+                    max={20}
+                    min={1}
+                  />
+                  <span className="text-xl mx-2 p-1 cursor-pointer">+</span>
+                </div>
+                <div>
+                  <h4>{item.discountprice}</h4>
+                </div>
               </div>
-              <div>
-                <h4>PKR {item.discountprice}</h4>
-              </div>
-              <div>
-                <span className="text-xl mx-2 p-1 cursor-pointer">-</span>
-                <input
-                  type="text"
-                  className="w-7 text-center"
-                  placeholder="1"
-                  value={item.quantity}
-                  disabled
-                  max={20}
-                  min={1}
-                />
-                <span
-                  className="text-xl mx-2 p-1 cursor-pointer"
-                >
-                  +
-                </span>
-              </div>
-              <div>
-                <h4>{item.discountprice}</h4>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
       {/* Return to home button */}
       <div>
@@ -101,7 +105,7 @@ export default function Cart() {
             <h3>Cart Total</h3>
             <div className="my-2">
               <h4 className="flex justify-between text-darkgrey text-sm pb-2 font-semibold">
-                Subtotal: <span className="text-black">$1750</span>
+                Subtotal: <span className="text-black">PKR {totalprice}</span>
               </h4>
               <hr />
             </div>
@@ -113,15 +117,15 @@ export default function Cart() {
             </div>
             <div className="my-2">
               <h4 className="flex justify-between text-darkgrey text-sm pb-2 font-semibold">
-                Total: <span className="text-black">$1750</span>
+                Total: <span className="text-black">PKR {totalprice}</span>
               </h4>
               <hr />
             </div>
             {/* Checkout button */}
             <div className="flex justify-center mt-4">
-              <button className="bg-reddish px-4 py-2 text-white font-semibold">
+              <Link to={'checkout'} className="bg-reddish px-4 py-2 text-white font-semibold">
                 Proceed to checkout
-              </button>
+              </Link>
             </div>
           </div>
         </div>

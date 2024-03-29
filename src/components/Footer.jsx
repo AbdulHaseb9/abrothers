@@ -45,9 +45,9 @@ export const Footer = () => {
           <h3 className="text-xl font-bold">Account</h3>
           <ul>
             <li className="my-2">
-              <a href="#" className="text-sm text-footercolor">
+              <Link to={"myaccount"} className="text-sm text-footercolor">
                 My Account
-              </a>
+              </Link>
             </li>
             <li className="my-2">
               <Link to={"signup"} className="text-sm text-footercolor">
@@ -55,7 +55,7 @@ export const Footer = () => {
               </Link>
             </li>
             <li className="my-2">
-              <Link to={'cart'} className="text-sm text-footercolor">
+              <Link to={"cart"} className="text-sm text-footercolor">
                 Cart
               </Link>
             </li>
