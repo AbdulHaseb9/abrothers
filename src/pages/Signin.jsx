@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SignImages from "../assets/images/sideimage.png";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { logintrue } from "../redux/Login/userlogin";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Signin = () => {
   const [logindata, setlogindata] = useState({
@@ -9,27 +11,35 @@ export const Signin = () => {
     password: "",
   });
 
+  // const [getuser, setgetuser] = useState();
+
+  // const selector = useSelector((state) => state.login.value);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const handlelogin = (e) => {
-    e.preventDefault();
-    fetch("https://abrotherbackend.vercel.app/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(logindata),
-    })
-      .then((resp) => {
-        resp.json();
-        resp.status === 400
-          ? toast.error("Invalid Credentials")
-          : toast.success("Login sucessfully");
-      })
-      .then((data) => {
-        console.log(data);
-        navigate("/");
+  const handlelogin = async (e) => {
+    try {
+      e.preventDefault();
+      const api = await fetch("https://abrotherbackend.vercel.app/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(logindata),
       });
+      const resp = await api.json();
+
+      resp.status === 400
+        ? toast.error("Invalid Credentials")
+        : toast.success("Login sucessfully");
+
+      localStorage.setItem("username", JSON.stringify(resp));
+      dispatch(logintrue());
+      navigate("/");
+    } catch (error) {
+      toast.error("error");
+    }
   };
 
   return (

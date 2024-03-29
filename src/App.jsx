@@ -12,6 +12,7 @@ import Cart from "./pages/Cart";
 import { Checkout } from "./pages/Checkout";
 import Productdetail from "./pages/Productdetail";
 import Filtercategory from "./pages/Filtercategory";
+import Myaccount from "./pages/Myaccount";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="myaccount" element={<Myaccount />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="category/:name/:prodname" element={<Productdetail />} />
           <Route path="category/:name" element={<Filtercategory />} />
