@@ -74,13 +74,13 @@ export default function Sales() {
           return (
             <div className="relative w-full" key={index}>
               {/* Discount value */}
-              <span className="z-40 bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
+              <span className="z-10 bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
                 {Math.round((item.discountprice / item.actualprice) * 100) -
                   100}
                 %
               </span>
               {/* add to wishlist */}
-              <span className="z-40 bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
+              <span className="z-10 bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
                 <FaRegHeart />
               </span>
               <div className="w-full border border-lightgrey relative">

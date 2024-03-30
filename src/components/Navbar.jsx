@@ -117,7 +117,55 @@ export const Navbar = () => {
         <div className="w-full">
           {submenu ? (
             <div className="w-full py-7 flex flex-col">
-              <h1>Hello</h1>
+              <Link
+                to={"category/mobile phones"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Mobile Phones
+              </Link>
+              <Link
+                to={"category/computers"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Computers
+              </Link>
+              <Link
+                to={"category/smart watches"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Smart Watches
+              </Link>
+              <Link
+                to={"category/camera"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Camera
+              </Link>
+              <Link
+                to={"category/headphones"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Head phones
+              </Link>
+              <Link
+                to={"category/gaming"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Gaming
+              </Link>
+              <Link
+                to={"category/accessories"}
+                onClick={() => setrespnav(false)}
+                className="border-y py-3 w-full pl-6 font-semibold"
+              >
+                Accessories
+              </Link>
             </div>
           ) : (
             <>
@@ -153,20 +201,32 @@ export const Navbar = () => {
                 >
                   Contact
                 </Link>
-                <Link
-                  to={"signup"}
-                  onClick={() => setrespnav(false)}
-                  className="border-y py-3 w-full pl-6 font-semibold"
-                >
-                  Signup
-                </Link>
-                <Link
-                  to={"signin"}
-                  onClick={() => setrespnav(false)}
-                  className="border-y py-3 w-full pl-6 font-semibold"
-                >
-                  Login
-                </Link>
+                {selector ? (
+                  <Link
+                    to={"myaccount"}
+                    onClick={() => setrespnav(false)}
+                    className="border-y py-3 w-full pl-6 font-semibold"
+                  >
+                    My Account
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      to={"signup"}
+                      onClick={() => setrespnav(false)}
+                      className="border-y py-3 w-full pl-6 font-semibold"
+                    >
+                      Signup
+                    </Link>
+                    <Link
+                      to={"signin"}
+                      onClick={() => setrespnav(false)}
+                      className="border-y py-3 w-full pl-6 font-semibold"
+                    >
+                      Login
+                    </Link>
+                  </>
+                )}
                 <Link
                   to={"signup"}
                   onClick={() => setrespnav(false)}

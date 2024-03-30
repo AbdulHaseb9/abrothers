@@ -18,10 +18,10 @@ export const Checkout = () => {
       <div>
         <div>
           <form
-            className="grid grid-cols-3 py-5 gap-7"
+            className="grid grid-cols-1 lg:grid-cols-3 py-5 gap-7"
             onSubmit={handlecheckout}
           >
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="name"
                 className="text-sm font-semibold text-darkgrey"
@@ -35,7 +35,7 @@ export const Checkout = () => {
                 className="border bg-lightgrey w-60 rounded"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="company"
                 className="text-sm font-semibold text-darkgrey"
@@ -49,7 +49,7 @@ export const Checkout = () => {
                 className="border bg-lightgrey w-60 rounded"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="address"
                 className="text-sm font-semibold text-darkgrey"
@@ -63,7 +63,7 @@ export const Checkout = () => {
                 className="border bg-lightgrey w-60 rounded"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="apartment"
                 className="text-sm font-semibold text-darkgrey"
@@ -78,7 +78,7 @@ export const Checkout = () => {
                 className="border bg-lightgrey w-60 rounded"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="city"
                 className="text-sm font-semibold text-darkgrey"
@@ -92,7 +92,7 @@ export const Checkout = () => {
                 className="border bg-lightgrey w-60 rounded"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="number"
                 className="text-sm font-semibold text-darkgrey"
@@ -106,7 +106,7 @@ export const Checkout = () => {
                 className="border bg-lightgrey w-60 rounded"
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-x-4">
               <label
                 htmlFor="email"
                 className="text-sm font-semibold text-darkgrey"
@@ -123,7 +123,7 @@ export const Checkout = () => {
             <input
               type="submit"
               value="Place Order"
-              className="col-span-3 bg-reddish w-28  px-2 py-1 text-white rounded"
+              className="lg:col-span-3 bg-reddish w-28  px-2 py-1 text-white rounded"
             />
           </form>
         </div>

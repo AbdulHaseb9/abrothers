@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // import { FaFacebookF } from "react-icons/fa6";
 // import { FaXTwitter } from "react-icons/fa6";
@@ -7,6 +8,7 @@ import { Link } from "react-router-dom";
 // import { FaLinkedinIn } from "react-icons/fa";
 
 export const Footer = () => {
+  const selector = useSelector((state) => state.login.value);
   return (
     <footer className="bg-black text-white px-4 md:px-6 lg:px-8 py-8 grid md:grid-cols-4 gap-9 md:gap-0">
       <div className="md:flex md:justify-center">
@@ -44,21 +46,24 @@ export const Footer = () => {
         <div>
           <h3 className="text-xl font-bold">Account</h3>
           <ul>
-            <li className="my-2">
+            {selector ? (
               <Link to={"myaccount"} className="text-sm text-footercolor">
                 My Account
               </Link>
-            </li>
-            <li className="my-2">
-              <Link to={"signup"} className="text-sm text-footercolor">
-                Login / Register
-              </Link>
-            </li>
-            <li className="my-2">
-              <Link to={"cart"} className="text-sm text-footercolor">
-                Cart
-              </Link>
-            </li>
+            ) : (
+              <>
+                <li className="my-2">
+                  <Link to={"signup"} className="text-sm text-footercolor">
+                    Login / Register
+                  </Link>
+                </li>
+                <li className="my-2">
+                  <Link to={"cart"} className="text-sm text-footercolor">
+                    Cart
+                  </Link>
+                </li>
+              </>
+            )}
             <li className="my-2">
               <a href="#" className="text-sm text-footercolor">
                 Wishlist
