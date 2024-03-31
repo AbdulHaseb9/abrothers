@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addtocart } from "../../redux/addtocart/addcart";
 import { Toaster, toast } from "react-hot-toast";
+import Cardskeleton from "../Cardskeleton";
 
 export default function Exploreproduct() {
   const [product, setproduct] = useState([]);
+  const [isloading, setisloading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -18,7 +20,10 @@ export default function Exploreproduct() {
   useEffect(() => {
     fetch("https://abrotherbackend.vercel.app/getproduct")
       .then((res) => res.json())
-      .then((data) => setproduct(data));
+      .then((data) => {
+        setproduct(data);
+        setisloading(false);
+      });
   }, []);
 
   const handleaddtocart = (item) => {
@@ -56,56 +61,73 @@ export default function Exploreproduct() {
       </div>
       {/* Product Cards */}
       <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {product.map((item, index) => {
-          return (
-            <div className="relative w-full" key={index}>
-              {/* Discount value */}
-              <span className="z-40 bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
-                {Math.round((item.discountprice / item.actualprice) * 100) -
-                  100}
-                %
-              </span>
-              {/* add to wishlist */}
-              <span className="z-40 bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
-                <FaRegHeart />
-              </span>
-              <div className="w-full border border-lightgrey relative">
-                {/* Product Image */}
-                <Link to={`category/${item.category}/${item.name}`}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-36 md:h-44 object-cover"
-                  />
-                </Link>
-                {/* Add to cart button*/}
-                <button
-                  onClick={() => handleaddtocart(item)}
-                  className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer"
-                >
-                  Add To Cart
-                </button>
-              </div>
-              <Link to={`category/${item.category}/${item.name}`}>
-                <div className="my-3 max-w-44">
-                  <h3 className="truncate">{item.name}</h3>
-                  <p className="text-reddish">
-                    {item.discountprice}
-                    <del className="text-darkgrey mx-3">{item.actualprice}</del>
-                  </p>
-                  <p className="flex my-2 gap-1 text-golden">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <span className="text-darkgrey mx-2">(88)</span>
-                  </p>
+        {isloading ? (
+          <>
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+            <Cardskeleton />
+          </>
+        ) : (
+          product.map((item, index) => {
+            return (
+              <div className="relative w-full" key={index}>
+                {/* Discount value */}
+                <span className="z-40 bg-reddish text-white text-xs p-1 rounded-md absolute top-2 left-2">
+                  {Math.round((item.discountprice / item.actualprice) * 100) -
+                    100}
+                  %
+                </span>
+                {/* add to wishlist */}
+                <span className="z-40 bg-lightgrey p-1 rounded-full absolute right-2 top-2 cursor-pointer">
+                  <FaRegHeart />
+                </span>
+                <div className="w-full border border-lightgrey relative">
+                  {/* Product Image */}
+                  <Link to={`category/${item.category}/${item.name}`}>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-36 md:h-44 object-cover"
+                    />
+                  </Link>
+                  {/* Add to cart button*/}
+                  <button
+                    onClick={() => handleaddtocart(item)}
+                    className="bg-black w-full text-white text-center py-1 font-semibold cursor-pointer"
+                  >
+                    Add To Cart
+                  </button>
                 </div>
-              </Link>
-            </div>
-          );
-        })}
+                <Link to={`category/${item.category}/${item.name}`}>
+                  <div className="my-3 max-w-44">
+                    <h3 className="truncate">{item.name}</h3>
+                    <p className="text-reddish">
+                      {item.discountprice}
+                      <del className="text-darkgrey mx-3">
+                        {item.actualprice}
+                      </del>
+                    </p>
+                    <p className="flex my-2 gap-1 text-golden">
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <span className="text-darkgrey mx-2">(88)</span>
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            );
+          })
+        )}
       </div>
       {/* View all product button */}
       <div className="flex justify-center items-center my-7">
