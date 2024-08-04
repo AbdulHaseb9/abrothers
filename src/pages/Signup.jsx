@@ -5,8 +5,9 @@ import { Toaster, toast } from "react-hot-toast";
 
 export const Signup = () => {
   const [registerdata, setregisterdata] = useState({
-    name: "",
-    emailorphone: "",
+    username: "",
+    fullname: "",
+    email: "",
     password: "",
   });
 
@@ -16,7 +17,7 @@ export const Signup = () => {
   const handleregister = (e) => {
     e.preventDefault();
 
-    fetch("https://abrotherbackend.vercel.app/register", {
+    fetch("http://localhost:8000/api/v1/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +32,7 @@ export const Signup = () => {
       })
       .then((data) => {
         console.log(data);
-        navigate("/login");
+        navigate("/signin");
       });
   };
 
@@ -52,12 +53,21 @@ export const Signup = () => {
           <form onSubmit={handleregister}>
             <input
               type="text"
-              required
-              placeholder="Enter name"
-              className="my-4 w-72 border-b outline-none text-darkgrey"
               onChange={(e) =>
-                setregisterdata({ ...registerdata, name: e.target.value })
+                setregisterdata({ ...logindata, username: e.target.value })
               }
+              placeholder="Enter username"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+              required
+            />
+            <input
+              type="text"
+              onChange={(e) =>
+                setregisterdata({ ...logindata, fullname: e.target.value })
+              }
+              placeholder="Enter Full Name"
+              className="my-4 w-72 border-b outline-none text-darkgrey"
+              required
             />
             <input
               type="email"
@@ -72,7 +82,7 @@ export const Signup = () => {
               }
             />
             <input
-              type="text"
+              type="password"
               required
               placeholder="Enter password"
               className="my-4 w-72 border-b outline-none text-darkgrey"

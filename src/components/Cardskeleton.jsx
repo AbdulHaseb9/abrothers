@@ -8,22 +8,22 @@ export default function Cardskeleton() {
       <div className="w-full relative">
         {/* Product Image Skeleton */}
         <div className="p-2">
-          <Skeleton height={156} />
+          <Skeleton className="h-40 w-32 mlg:w-44 md:52" />
         </div>
         {/* Add to cart button Skeleton*/}
         <button className="px-2">
-          <Skeleton width={210} />
+          <Skeleton className="w-32 mlg:w-44 md:w-44" />
         </button>
       </div>
       <div className="my-3 max-w-44">
         <h3 className="px-2">
-          <Skeleton width={200} />
+          <Skeleton className="w-32 mlg:w-44 md:w-44" />
         </h3>
         <p className="px-2">
-          <Skeleton width={150} />
+          <Skeleton className="w-32 mlg:w-44 md:48" />
         </p>
         <p className="px-2">
-          <Skeleton width={100} />
+          <Skeleton className="w-28" />
         </p>
       </div>
     </div>

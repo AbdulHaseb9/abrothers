@@ -1,4 +1,5 @@
 import React from "react";
+import { FaRegTrashCan } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -44,34 +45,39 @@ export default function Cart() {
         ) : (
           count.map((item, index) => {
             return (
-              <div
-                key={index}
-                className="shadow-[rgba(17,_17,_26,_0.1)_0px_0px_5px] border border-lightgrey grid grid-cols-4 place-items-center font-semibold my-5"
-              >
-                <div className="md:flex items-center">
-                  <img src={item.image} alt={item.name} className="max-h-20" />
-                  <figcaption className="text-center truncate w-32">
-                    {item.name}
-                  </figcaption>
+              <div>
+                <div
+                  key={index}
+                  className="shadow-[rgba(17,_17,_26,_0.1)_0px_0px_5px] border border-lightgrey grid grid-cols-4 place-items-center font-semibold my-5"
+                >
+                  <div className="md:flex items-center">
+                    <img src={item.image} alt={item.name} className="max-h-20" />
+                    <figcaption className="text-center truncate w-16 md:w-40">
+                      {item.name}
+                    </figcaption>
+                  </div>
+                  <div className="text-center">
+                    <h4 className="text-sm">PKR {item.discountprice}</h4>
+                  </div>
+                  <div className="flex flex-col items-center md:flex-row">
+                    <span className="text-xl mx-2 p-1 cursor-pointer">-</span>
+                    <input
+                      type="text"
+                      className="w-7 text-center"
+                      placeholder="1"
+                      value={item.quantity}
+                      disabled
+                      max={20}
+                      min={1}
+                    />
+                    <span className="text-xl mx-2 p-1 cursor-pointer">+</span>
+                  </div>
+                  <div>
+                    <h4>{item.discountprice}</h4>
+                  </div>
                 </div>
-                <div>
-                  <h4>PKR {item.discountprice}</h4>
-                </div>
-                <div>
-                  <span className="text-xl mx-2 p-1 cursor-pointer">-</span>
-                  <input
-                    type="text"
-                    className="w-7 text-center"
-                    placeholder="1"
-                    value={item.quantity}
-                    disabled
-                    max={20}
-                    min={1}
-                  />
-                  <span className="text-xl mx-2 p-1 cursor-pointer">+</span>
-                </div>
-                <div>
-                  <h4>{item.discountprice}</h4>
+                <div className="w-full flex justify-end">
+                  <FaRegTrashCan className="mr-8" />
                 </div>
               </div>
             );

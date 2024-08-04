@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa6";
@@ -78,9 +78,8 @@ export const Navbar = () => {
         </div>
       </header>
       <div
-        className={`md:hidden h-screen w-72 fixed bg-[#fefefe] z-30 top-[32.5px] ${
-          respnav ? `-left-0` : `-left-full`
-        } transition-all duration-300`}
+        className={`md:hidden h-screen w-72 fixed bg-[#fefefe] z-30 top-[32.5px] ${respnav ? `-left-0` : `-left-full`
+          } transition-all duration-300`}
       >
         <div className="py-2 px-3 flex justify-end">
           <ImCross
@@ -91,11 +90,10 @@ export const Navbar = () => {
         <div className="w-full flex py-4">
           <div className="w-1/2">
             <h3
-              className={`text-lg font-semibold border-black text-center pb-1 py-2 ${
-                submenu
-                  ? `text-[#aeaeae]`
-                  : "bg-[#eaeaea] text-black  border-b-2"
-              }`}
+              className={`text-lg font-semibold border-black text-center pb-1 py-2 ${submenu
+                ? `text-[#aeaeae]`
+                : "bg-[#eaeaea] text-black  border-b-2"
+                }`}
               onClick={() => setsubmenu(false)}
             >
               Main Menu
@@ -103,11 +101,10 @@ export const Navbar = () => {
           </div>
           <div className="w-1/2">
             <h3
-              className={`text-lg font-semibold border-black text-center pb-1 py-2 ${
-                submenu
-                  ? `bg-[#eaeaea] text-black border-b-2`
-                  : "text-[#aeaeae]"
-              }`}
+              className={`text-lg font-semibold border-black text-center pb-1 py-2 ${submenu
+                ? `bg-[#eaeaea] text-black border-b-2`
+                : "text-[#aeaeae]"
+                }`}
               onClick={() => setsubmenu(true)}
             >
               Categories

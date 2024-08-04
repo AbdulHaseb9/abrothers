@@ -2,10 +2,6 @@ import React from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { FaFacebookF } from "react-icons/fa6";
-// import { FaXTwitter } from "react-icons/fa6";
-// import { FaInstagram } from "react-icons/fa";
-// import { FaLinkedinIn } from "react-icons/fa";
 
 export const Footer = () => {
   const selector = useSelector((state) => state.login.value);
@@ -104,23 +100,6 @@ export const Footer = () => {
           </ul>
         </div>
       </div>
-      {/* <div>
-      <div>
-          <h3>Socials Links</h3>
-          <a href="#">
-            <FaFacebookF />
-          </a>
-          <a href="#">
-            <FaXTwitter  />
-          </a>
-          <a href="#">
-            <FaInstagram />
-          </a>
-          <a href="#">
-            <FaLinkedinIn />
-          </a>
-          </div>
-        </div> */}
     </footer>
   );
 };

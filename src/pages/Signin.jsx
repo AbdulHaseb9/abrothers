@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const Signin = () => {
   const [logindata, setlogindata] = useState({
-    emailorphone: "",
+    email: "",
     password: "",
   });
 
@@ -28,15 +28,19 @@ export const Signin = () => {
         },
         body: JSON.stringify(logindata),
       });
+      console.log(api.status);
       const resp = await api.json();
 
-      resp.status === 400
-        ? toast.error("Invalid Credentials")
-        : toast.success("Login sucessfully");
 
-      localStorage.setItem("username", JSON.stringify(resp));
-      dispatch(logintrue());
-      navigate("/");
+      if (api.status >= 350) {
+        return toast.error(resp)
+      } else {
+        toast.success("Login sucessfully");
+        localStorage.setItem("username", JSON.stringify(resp));
+        dispatch(logintrue());
+        navigate("/");
+      }
+
     } catch (error) {
       toast.error("error");
     }
@@ -61,13 +65,13 @@ export const Signin = () => {
               type="text"
               required
               onChange={(e) =>
-                setlogindata({ ...logindata, emailorphone: e.target.value })
+                setlogindata({ ...logindata, email: e.target.value })
               }
               placeholder="Email or Phone Number"
               className="my-4 w-72 border-b outline-none text-darkgrey"
             />
             <input
-              type="text"
+              type="password"
               onChange={(e) =>
                 setlogindata({ ...logindata, password: e.target.value })
               }
@@ -79,7 +83,7 @@ export const Signin = () => {
               <input
                 type="submit"
                 value={"Login"}
-                className="w-24 text-white bg-reddish text-sm px-3 py-2.5 text-center me-2 mb-2 rounded-sm"
+                className="w-24 text-white bg-reddish text-sm px-3 py-2.5 text-center me-2 mb-2 rounded-sm cursor-pointer"
               />
               <p className="text-reddish text-sm text-center cursor-pointer">
                 Forget Password?

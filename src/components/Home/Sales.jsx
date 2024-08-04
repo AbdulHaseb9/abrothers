@@ -74,7 +74,7 @@ export default function Sales() {
         </div>
       </div>
       {/* Product Cards */}
-      <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {isloading ? (
           <>
             <Cardskeleton />
@@ -109,7 +109,7 @@ export default function Sales() {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-36 md:h-44 object-cover"
+                      className="w-full h-36 md:h-44 2xl:h-56 object-cover"
                     />
                   </Link>
                   {/* Add to cart button*/}
